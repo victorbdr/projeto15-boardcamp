@@ -13,9 +13,6 @@ async function getRentals(req, res) {
     JOIN categories
     ON categories.id = games."categoryId";
     `);
-    /* 
-    
-    `); */
 
     const rentData = showRental.rows.map((rent) => {
       return {
