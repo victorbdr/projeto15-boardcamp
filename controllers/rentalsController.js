@@ -3,16 +3,19 @@ import dayjs from "dayjs";
 
 async function getRentals(req, res) {
   try {
-    const showRental = await db.query(`SELECT rentals.*,
-    games.name AS "gamesName",
-    customers.name AS "customersName",
-    games."categoryId",
-    categories.name AS "categoryName"
-    FROM rentals
-    JOIN games ON rentals."gamesId"=games.id
-    JOIN customers ON rentals."customersId" = customers.id
-    JOIN categories ON games."categoriesId" = categories.id
+    const showRental =
+      await db.query(`SELECT rentals.*, games.name, games.image, games."categoryId", customers.name as "customerName", categories.name as "categoryName"
+    FROM rentals 
+    JOIN games 
+    ON rentals."gameId" = games.id
+    JOIN customers 
+        ON rentals."customerId"  = customers.id 
+    JOIN categories
+    ON categories.id = games."categoryId";
     `);
+    /* 
+    
+    `); */
 
     const rentData = showRental.rows.map((rent) => {
       return {
