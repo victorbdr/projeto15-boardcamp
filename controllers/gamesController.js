@@ -36,7 +36,7 @@ async function postGame(req, res) {
         req.body.pricePerDay,
       ]
     );
-    res.sendStatus(201);
+    return res.sendStatus(201);
   } catch (e) {
     console.log("erro ao adicionar game", e);
     res.status(500).send(e);
